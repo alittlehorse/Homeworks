@@ -1,0 +1,70 @@
+c:\users\asus\documents\visual studio 2017\Projects\payment\payment\bin\Debug\payment.exe.config
+c:\users\asus\documents\visual studio 2017\Projects\payment\payment\bin\Debug\payment.exe
+c:\users\asus\documents\visual studio 2017\Projects\payment\payment\bin\Debug\payment.pdb
+c:\users\asus\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.csprojResolveAssemblyReference.cache
+c:\users\asus\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.Properties.Resources.resources
+c:\users\asus\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.csproj.GenerateResource.Cache
+c:\users\asus\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.exe
+c:\users\asus\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.pdb
+C:\Users\ASUS\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.UI.FormPayment.resources
+C:\Users\ASUS\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.UI.FormReserve.resources
+C:\Users\ASUS\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.UI.FormBedManagement.resources
+C:\Users\ASUS\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.UI.FormSelect.resources
+C:\Users\ASUS\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.UI.FormLeave.resources
+C:\Users\ASUS\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.UI.FormMedicalRecord.resources
+C:\Users\ASUS\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.UI.FormPermission.resources
+C:\Users\ASUS\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.UI.FormLogin.resources
+C:\Users\ASUS\documents\visual studio 2017\Projects\payment\payment\obj\Debug\payment.UI.FormRegister.resources
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\bin\Debug\payment.exe.config
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\bin\Debug\payment.exe
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\bin\Debug\payment.pdb
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.csprojResolveAssemblyReference.cache
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.Properties.Resources.resources
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.UI.FormBedManagement.resources
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.UI.FormLeave.resources
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.UI.FormLogin.resources
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.UI.FormMedicalRecord.resources
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.UI.FormPayment.resources
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.UI.FormPermission.resources
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.UI.FormRegister.resources
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.UI.FormReserve.resources
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.UI.FormSelect.resources
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.csproj.GenerateResource.Cache
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.csproj.CoreCompileInputs.cache
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.exe
+C:\Users\zy\Desktop\软件工程大作业\payment1\payment\payment\obj\Debug\payment.pdb
+D:\learning\软件工程\大作业\本组作业\payment\payment\bin\Debug\payment.exe.config
+D:\learning\软件工程\大作业\本组作业\payment\payment\bin\Debug\payment.exe
+D:\learning\软件工程\大作业\本组作业\payment\payment\bin\Debug\payment.pdb
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.csprojResolveAssemblyReference.cache
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.Properties.Resources.resources
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.UI.FormBedManagement.resources
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.UI.FormLeave.resources
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.UI.FormLogin.resources
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.UI.FormMedicalRecord.resources
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.UI.FormPayment.resources
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.UI.FormPermission.resources
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.UI.FormRegister.resources
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.UI.FormReserve.resources
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.UI.FormSelect.resources
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.csproj.GenerateResource.Cache
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.csproj.CoreCompileInputs.cache
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.exe
+D:\learning\软件工程\大作业\本组作业\payment\payment\obj\Debug\payment.pdb
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\bin\Debug\payment.exe.config
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\bin\Debug\payment.exe
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\bin\Debug\payment.pdb
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.csprojResolveAssemblyReference.cache
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.Properties.Resources.resources
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.UI.FormBedManagement.resources
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.UI.FormLeave.resources
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.UI.FormLogin.resources
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.UI.FormMedicalRecord.resources
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.UI.FormPayment.resources
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.UI.FormPermission.resources
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.UI.FormRegister.resources
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.UI.FormReserve.resources
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.UI.FormSelect.resources
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.csproj.GenerateResource.Cache
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.exe
+C:\Users\ASUS\Downloads\TIM\payment\payment\payment\obj\Debug\payment.pdb

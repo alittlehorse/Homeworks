@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8448176E-C084-4AB5-B7F6-3381FBD7DE7B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>payment</RootNamespace>
+    <AssemblyName>payment</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\AddLeavePatient.cs" />
+    <Compile Include="BLL\AddMedicalRecord.cs" />
+    <Compile Include="BLL\BedManagement\MBed.cs" />
+    <Compile Include="BLL\Login\LoginOrRegister.cs" />
+    <Compile Include="BLL\ManageOfDepartment.cs" />
+    <Compile Include="BLL\ManagmentOfContent.cs" />
+    <Compile Include="BLL\model\Balance.cs" />
+    <Compile Include="BLL\model\Bed.cs" />
+    <Compile Include="BLL\model\Content.cs" />
+    <Compile Include="BLL\model\Department.cs" />
+    <Compile Include="BLL\model\Fee.cs" />
+    <Compile Include="BLL\model\LeaveInfo.cs" />
+    <Compile Include="BLL\model\Patients.cs" />
+    <Compile Include="BLL\model\BeingHospitalized.cs" />
+    <Compile Include="BLL\model\User.cs" />
+    <Compile Include="BLL\PatientInfo\Patientinfo.cs" />
+    <Compile Include="BLL\payment\Prepaid.cs" />
+    <Compile Include="BLL\model\PrepaidPayment.cs" />
+    <Compile Include="BLL\Reserve\PatientReserve.cs" />
+    <Compile Include="BLL\Reserve\PermissionCheck.cs" />
+    <Compile Include="BLL\statistics\StatisticsFind.cs" />
+    <Compile Include="DAL\Sqlhelper.cs" />
+    <Compile Include="UI\FormBedManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormBedManagement.Designer.cs">
+      <DependentUpon>FormBedManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormLeave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormLeave.Designer.cs">
+      <DependentUpon>FormLeave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormMedicalRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormMedicalRecord.designer.cs">
+      <DependentUpon>FormMedicalRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormPayment.designer.cs">
+      <DependentUpon>FormPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\FormPermission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormPermission.designer.cs">
+      <DependentUpon>FormPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormRegister.Designer.cs">
+      <DependentUpon>FormRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormReserve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormReserve.Designer.cs">
+      <DependentUpon>FormReserve.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormSelect.Designer.cs">
+      <DependentUpon>FormSelect.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UI\FormBedManagement.resx">
+      <DependentUpon>FormBedManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormLeave.resx">
+      <DependentUpon>FormLeave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormMedicalRecord.resx">
+      <DependentUpon>FormMedicalRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormPayment.resx">
+      <DependentUpon>FormPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormPermission.resx">
+      <DependentUpon>FormPermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormRegister.resx">
+      <DependentUpon>FormRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormReserve.resx">
+      <DependentUpon>FormReserve.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormSelect.resx">
+      <DependentUpon>FormSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
