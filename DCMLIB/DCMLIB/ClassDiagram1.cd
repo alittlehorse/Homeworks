@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DCMLIB.VRFactory">
+    <Position X="7.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AGAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VRFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.VR" Collapsed="true">
+    <Position X="4.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AGAAAAAgYAAAAAAABAAABAAAAAAAAAQQAABAACAAAgA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.longVR" Collapsed="true">
+    <Position X="12.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.UL" Collapsed="true">
+    <Position X="2.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.US" Collapsed="true">
+    <Position X="4.5" Y="4.25" Width="1.5" />
+    <InheritanceLine Type="DCMLIB.VR" ManuallyRouted="true">
+      <Path>
+        <Point X="5" Y="1.798" />
+        <Point X="5" Y="3.848" />
+        <Point X="5.25" Y="3.848" />
+        <Point X="5.25" Y="4.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.DCMAbstractType" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAgAAAEAEAAAAAAAABEACAAAAAAABAAQAA=</HashCode>
+      <FileName>DCMDataTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.DCMDataElement" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DCMDataTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.DCMDataSet" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>DCMDataTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.AS">
+    <Position X="8.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.DA">
+    <Position X="1.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.DS">
+    <Position X="3.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.FD">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.DT">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.SS">
+    <Position X="6.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.FS">
+    <Position X="1.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.IS">
+    <Position X="3.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.SL">
+    <Position X="6" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.SQ">
+    <Position X="13.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.TM">
+    <Position X="8" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DCMLIB.TX">
+    <Position X="3" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
