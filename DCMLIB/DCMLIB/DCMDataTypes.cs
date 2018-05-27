@@ -36,7 +36,7 @@ namespace DCMLIB
             String Value = vrparser.GetString(value,head);
             str += Value;
             str += '\n';
-            str.Replace("\0", " ");
+            
             return str; 
 
         }
@@ -67,7 +67,7 @@ namespace DCMLIB
                     str += item.ToString(head);
                 }
             }
-            str.Replace("\0", " ");
+            
             return str;
         }
 
@@ -99,7 +99,7 @@ namespace DCMLIB
                 str += item.ToString(head);
                 i++;
             }
-            str.Replace("\0", " ");
+            
             return str;
         }
     }
@@ -117,7 +117,7 @@ namespace DCMLIB
                     str += item.ToString(head);
                 }
             }
-            str.Replace("\0", " ");
+            
             return str;
         }
     }

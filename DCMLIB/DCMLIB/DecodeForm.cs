@@ -26,7 +26,7 @@ namespace DCMLIB
             //调用Decode方法进行解码
             dCM.Decode(data, ref idx);
             
-            richTextBox2.Text= dCM.ToString(" ");
+            richTextBox2.Text= dCM.ToString(" ").Replace('\0',' ');
 
         }
 
