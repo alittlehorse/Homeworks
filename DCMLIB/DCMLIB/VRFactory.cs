@@ -37,29 +37,13 @@ namespace DCMLIB
         {
             {
                 VR vr = null;
-                if (key == "SS")
+                if (key == "UL")
                 {
-                    vr = new SS(syntax);
+                    vr = new UL(syntax);
                 }
                 else if (key == "US")
                 {
                     vr = new US(syntax);
-                }
-                else if (key == "UL")
-                {
-                    vr = new UL(syntax);
-                }
-                else if (key == "SL")
-                {
-                    vr = new SL(syntax);
-                }
-                else if (key == "IS")
-                {
-                    vr = new IS(syntax);
-                }
-                else if (key == "FS")
-                {
-                    vr = new FS(syntax);
                 }
                 else if (key == "AS")
                 {
@@ -69,6 +53,74 @@ namespace DCMLIB
                 {
                     vr = new DA(syntax);
                 }
+                else if (key == "DS")
+                {
+                    vr = new DS(syntax);
+                }
+                else if (key == "FD")
+                {
+                    vr = new FD(syntax);
+                }
+                else if (key == "DT")
+                {
+                    vr = new DT(syntax);
+                }
+                else if (key == "SS")
+                {
+                    vr = new SS(syntax);
+                }
+                else if (key == "FS")
+                {
+                    vr = new FS(syntax);
+                }
+                else if (key == "OW")
+                {
+                    vr = new OW(syntax);
+                }
+                else if (key == "UN")
+                {
+                    vr = new UN(syntax);
+                }
+                else if (key == "UT")
+                {
+                    vr = new UT(syntax);
+                }
+                else if (key == "SH")
+                {
+                    vr = new SH(syntax);
+                }
+                else if (key == "ST")
+                {
+                    vr = new ST(syntax);
+                }
+                else if (key == "LT")
+                {
+                    vr = new LT(syntax);
+                }
+                else if (key == "AE")
+                {
+                    vr = new AE(syntax);
+                }
+                else if (key == "CS")
+                {
+                    vr = new CS(syntax);
+                }
+                else if (key == "IS")
+                {
+                    vr = new IS(syntax);
+                }
+                else if (key == "SL")
+                {
+                    vr = new SL(syntax);
+                }
+                else if (key == "SQ")
+                {
+                    vr = new SQ(syntax);
+                }
+                else if (key == "TM")
+                {
+                    vr = new TM(syntax);
+                }
                 else if (key == "UI")
                 {
                     vr = new UI(syntax);
@@ -77,9 +129,21 @@ namespace DCMLIB
                 {
                     vr = new LO(syntax);
                 }
-                else if (key == "SQ")
+                else if (key == "TS")
                 {
-                    vr = new SQ(syntax);
+                    vr = new TS(syntax);
+                }
+                else if (key == "PN")
+                {
+                    vr = new PN(syntax);
+                }
+                else if (key == "OB")
+                {
+                    vr = new OB(syntax);
+                }
+                else if (key == "OF")
+                {
+                    vr = new OF(syntax);
                 }
                 return vr;
 

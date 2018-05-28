@@ -141,7 +141,7 @@ namespace DCMLIB
         {
             isExplicit = true;
             isBE = false;
-            uid = "1.2.840.10008.1.2";
+            uid = "1.2.840.10008.1.2.1";
             name = "ExplicitVRLittleEndian";
         }
     }
@@ -153,10 +153,11 @@ namespace DCMLIB
         {
             isExplicit = true;
             isBE = true;
-            uid = "1.2.840.10008.1.2";
+            uid = "1.2.840.10008.1.2.2";
             name = "ExplicitVRBigEndian";
         }
     }
+
 
 }
 

@@ -19,14 +19,28 @@ namespace DCMLIB
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TransferSyntax syntax = (TransferSyntax)comboBox1.SelectedItem;
-            byte[] data = HexStringToByteArray(richTextBox1.Text);
-            DCMDataSet dCM = new DCMDataSet(syntax);
-            uint idx = 0;           
-            //调用Decode方法进行解码
-            dCM.Decode(data, ref idx);
-            
-            richTextBox2.Text= dCM.ToString(" ").Replace('\0',' ');
+            if (comboBox1.SelectedItem==null)
+            {
+                MessageBox.Show("请选择传输语法");
+            }
+            else {
+                TransferSyntax syntax = (TransferSyntax)comboBox1.SelectedItem;
+                byte[] data = HexStringToByteArray(richTextBox1.Text);
+                DCMDataSet dCM = new DCMDataSet(syntax);
+                uint idx = 0;
+                //调用Decode方法进行解码
+                try
+                {
+                    dCM.Decode(data, ref idx);
+                }
+                catch(Exception erro)
+                {
+                    MessageBox.Show(erro.Message);
+                }
+
+                richTextBox2.Text= dCM.ToString(" ").Replace('\0', ' ');
+            }
+
 
         }
 
@@ -37,14 +51,22 @@ namespace DCMLIB
         /// <returns></returns>
         private byte[] HexStringToByteArray(string s)
         {
-            s = s.Replace(" ", "");
-            byte[] buffer = new byte[s.Length / 2];
-            for (int i = 0; i < s.Length; i += 2)
+            try
             {
-                buffer[i / 2] = (byte)Convert.ToByte(s.Substring(i, 2), 16);
+                s = s.Replace(" ", "");
+                byte[] buffer = new byte[s.Length / 2];
+                for (int i = 0; i < s.Length; i += 2)
+                {
+                    buffer[i / 2] = (byte)Convert.ToByte(s.Substring(i, 2), 16);
 
+                }
+                return buffer;
             }
-            return buffer;
+            catch 
+            {
+                throw;
+            }
+           
         }
 
         private void DecodeForm_Load(object sender, EventArgs e)

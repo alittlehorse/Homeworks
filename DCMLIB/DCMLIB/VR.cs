@@ -249,6 +249,7 @@ namespace DCMLIB
             idx += 4;
             return number;
         }
+        
     }
 
 
@@ -361,7 +362,7 @@ namespace DCMLIB
         public FD(TransferSyntax syntax) : base(syntax) { }
         public override string GetString(byte[] data, String head)
         {
-            return GetDouble(data).ToString();
+            return head+GetDouble(data).ToString();
 
         }
     }
@@ -387,7 +388,7 @@ namespace DCMLIB
         public SS(TransferSyntax syntax) : base(syntax) { }
         public override string GetString(byte[] data, String head)
         {
-            return GetInt16(data).ToString();
+            return head+GetInt16(data).ToString();
         }
     }
     /// <summary>
@@ -398,10 +399,99 @@ namespace DCMLIB
         public FS(TransferSyntax syntax) : base(syntax) { }
         public override string GetString(byte[] data, String head)
         {
-            return GetSingle(data).ToString();
+            return head+GetSingle(data).ToString();
+        }
+    }
+    /// <summary>
+    /// 解码解得byte
+    /// </summary>
+    public class OB : LongVR
+    {
+        public OB(TransferSyntax syntax) : base(syntax) { }
+        public override string GetString(byte[] data, String head)
+        {
+            return head+ Encoding.Default.GetString(data, 0, data.Length);
+        }
+    }
+    /// <summary>
+    /// 解Value的得到Single
+    /// </summary>
+    public class OF : LongVR
+    {
+        public OF(TransferSyntax syntax) : base(syntax) { }
+        public override string GetString(byte[] data, String head)
+        {
+            return head+GetSingle(data).ToString();
+        }
+    }
+    public class OW : LongVR
+    {
+        public OW(TransferSyntax syntax) : base(syntax) { }
+        public override string GetString(byte[] data, String head)
+        {
+            return head+GetDouble(data).ToString();
+        }
+    }
+    public class UN : LongVR
+    {
+        public UN(TransferSyntax syntax) : base(syntax) { }
+        public override string GetString(byte[] data, String head)
+        {
+            return head+ Encoding.Default.GetString(data, 0, data.Length);
+        }
+    }
+    public class UT : LongVR
+    {
+        public UT(TransferSyntax syntax) : base(syntax) { }
+        public override string GetString(byte[] data, String head)
+        {
+            return head+Encoding.Default.GetString(data, 0, data.Length);
+        }
+    }
+    public class SH : VR
+    {
+        public SH(TransferSyntax syntax) : base(syntax) { }
+        public override string GetString(byte[] data, String head)
+        {
+            return head+Encoding.Default.GetString(data, 0, data.Length);
         }
     }
 
+    public class ST : VR
+    {
+        public ST(TransferSyntax syntax) : base(syntax) { }
+        public override string GetString(byte[] data, String head)
+        {
+            return head+Encoding.Default.GetString(data, 0, data.Length);
+        }
+    }
+
+    public class LT : VR
+    {
+        public LT(TransferSyntax syntax) : base(syntax) { }
+        public override string GetString(byte[] data, String head)
+        {
+            return head+Encoding.Default.GetString(data, 0, data.Length);
+        }
+    }
+   
+    public class AE : VR
+    {
+        public AE(TransferSyntax syntax) : base(syntax) { }
+        public override string GetString(byte[] data, String head)
+        {
+            return head+Encoding.Default.GetString(data, 0, data.Length);
+        }
+    }
+    
+    public class CS : VR
+    {
+        public CS(TransferSyntax syntax) : base(syntax) { }
+        public override string GetString(byte[] data, String head)
+        {
+            return head+Encoding.Default.GetString(data, 0, data.Length);
+        }
+    }
     public class IS : VR
     {
         public IS(TransferSyntax syntax) : base(syntax) { }
@@ -417,7 +507,7 @@ namespace DCMLIB
         public SL(TransferSyntax syntax) : base(syntax) { }
         public override string GetString(byte[] data, String head)
         {
-            return GetInt32(data).ToString();
+            return head+GetInt32(data).ToString();
         }
     }
 
@@ -479,7 +569,7 @@ namespace DCMLIB
         public UI(TransferSyntax syntax) : base(syntax) { }
         public override string GetString(byte[] data, String head)
         {
-            return Encoding.Default.GetString(data, 0, data.Length);
+            return head+Encoding.Default.GetString(data, 0, data.Length);
         }
     }
     public class LO : VR
@@ -490,9 +580,34 @@ namespace DCMLIB
         }
         public override string GetString(byte[] data, String head)
         {
-            return Encoding.Default.GetString(data, 0, data.Length);
+            return head+Encoding.Default.GetString(data, 0, data.Length);
         }
     }
+    public class TS:VR
+    {
+        public TS(TransferSyntax syntax) : base(syntax)
+        {
+
+        }
+        public override string GetString(byte[] data, String head)
+        {
+                return head+Encoding.Default.GetString(data, 0, data.Length);
+
+        }
+    }
+    public class PN : VR
+    {
+        public PN(TransferSyntax syntax) : base(syntax)
+        {
+
+        }
+        public override string GetString(byte[] data, String head)
+        {
+            return head + Encoding.Default.GetString(data, 0, data.Length);
+
+        }
+    }
+
 
 
 }
