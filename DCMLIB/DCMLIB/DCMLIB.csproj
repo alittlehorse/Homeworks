@@ -54,6 +54,7 @@
       <DependentUpon>DecodeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DicomDictionary.cs" />
+    <Compile Include="DicomTags.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="VR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

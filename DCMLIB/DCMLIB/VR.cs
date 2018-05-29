@@ -533,7 +533,7 @@ namespace DCMLIB
                 if (tag== "(FFFE,E0DD)")
                     break;
                 else
-                    sq.items.Add((DCMDataItem)item);
+                    sq[0]= (DCMDataItem)item;
             }
             GCHandle handle = GCHandle.Alloc(sq);
             IntPtr ptr = GCHandle.ToIntPtr(handle);

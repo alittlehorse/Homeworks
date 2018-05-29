@@ -47,6 +47,7 @@ namespace DCMLIB
             element.gtag = vrdecoder.GetGroupTag(data, ref idx);
             element.etag = vrdecoder.GetElementTag(data, ref idx);
             string tag = "(" + element.gtag.ToString("X4") + "," + element.etag.ToString("X4") + ")";
+
             if (tag == "(FFFE,E000)")
             {
                 DCMDataItem sqitem = new DCMDataItem(this);
@@ -61,7 +62,7 @@ namespace DCMLIB
                     //解出Tag不为DataElemt类型时,重复的递归
                     DCMAbstractType sqelem = Decode(data, ref idx);
                     if (sqelem.gtag == 0xfffe && sqelem.etag == 0xe00d) break;//这句有问题
-                    sqitem.items.Add(sqelem);
+                    sqitem[0]=sqelem;
                 }
                 return sqitem;
             }
@@ -110,12 +111,24 @@ namespace DCMLIB
 
     public class TransferSyntaxes
     {
-        public TransferSyntax[] TSs = new TransferSyntax[3];
+        public List<TransferSyntax> TSs = new List<TransferSyntax>();
         public TransferSyntaxes()
         {
-            TSs[0] = new ImplicitVRLittleEndian();
-            TSs[1] = new ExplicitVRLittleEndian();
-            TSs[2] = new ExplicitVRBigEndian();
+            TSs.Add(new ImplicitVRLittleEndian());
+            TSs.Add( new ExplicitVRLittleEndian());
+            TSs.Add( new ExplicitVRBigEndian());
+        }
+        /// <summary>
+        /// TransferSyntaxs的索引,用来通过uid返回对应的TransferSyntax类型
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public TransferSyntax this[String uid]
+        {
+            get {
+                TransferSyntax syn = TSs.Find(tsyn => tsyn.uid == uid);
+                return syn;
+            }
         }
     }
 

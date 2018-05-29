@@ -49,7 +49,7 @@ namespace DCMLIB
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        private byte[] HexStringToByteArray(string s)
+        public static byte[] HexStringToByteArray(string s)
         {
             try
             {

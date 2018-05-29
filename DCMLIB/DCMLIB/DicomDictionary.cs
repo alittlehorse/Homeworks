@@ -13,7 +13,7 @@ namespace DCMLIB
         DicomDictonaryEntry dde;
         public DicomDictionary()
         {
-            StreamReader sr = new StreamReader("E:\\dicom.txt", Encoding.Default);
+            StreamReader sr = new StreamReader("dicom.txt", Encoding.Default);
             String line;
             while ((line = sr.ReadLine()) != null)
             {
