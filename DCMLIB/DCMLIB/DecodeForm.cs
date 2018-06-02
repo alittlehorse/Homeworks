@@ -38,7 +38,14 @@ namespace DCMLIB
                     MessageBox.Show(erro.Message);
                 }
 
-                richTextBox2.Text= dCM.ToString(" ").Replace('\0', ' ');
+                string str = dCM.ToString("").Replace("\0","");
+                string[] lines = str.Split('\n');
+                lvOutput.Items.Clear();
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    ListViewItem item = new ListViewItem(lines[i].Split('\t'));
+                    lvOutput.Items.Add(item);
+                }
             }
 
 
@@ -83,6 +90,23 @@ namespace DCMLIB
 
         private void lvOutput_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DCMFile dcm = new DCMFile(".//gsps.txt");
+            uint idx = 0;
+            dcm.Decode(null,ref idx);
+            string str = dcm.ToString("").Replace('\0', ' ');
+            string[] lines = str.Split('\n');
+            lvOutput.Items.Clear();
+            for (int i = 0; i < lines.Length; i++)
+            {
+                ListViewItem item = new ListViewItem(lines[i].Split('\t'));
+                lvOutput.Items.Add(item);
+            }
+
 
         }
     }

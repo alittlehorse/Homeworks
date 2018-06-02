@@ -33,14 +33,21 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.lvOutput = new System.Windows.Forms.ListView();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(366, 435);
+            this.button1.Location = new System.Drawing.Point(268, 438);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 22);
             this.button1.TabIndex = 0;
             this.button1.Text = "解码";
             this.button1.UseVisualStyleBackColor = true;
@@ -58,7 +65,8 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(163, 43);
+            this.comboBox1.Location = new System.Drawing.Point(163, 42);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(285, 23);
             this.comboBox1.TabIndex = 3;
@@ -74,31 +82,72 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(163, 123);
+            this.richTextBox1.Location = new System.Drawing.Point(163, 122);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(534, 96);
+            this.richTextBox1.Size = new System.Drawing.Size(535, 96);
             this.richTextBox1.TabIndex = 11;
             this.richTextBox1.Text = "";
             // 
-            // richTextBox2
+            // button2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(163, 241);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(534, 143);
-            this.richTextBox2.TabIndex = 12;
-            this.richTextBox2.Text = "";
+            this.button2.Location = new System.Drawing.Point(460, 431);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(100, 29);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "文件";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // lvOutput
+            // 
+            this.lvOutput.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2,
+            this.columnHeader1,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.lvOutput.Location = new System.Drawing.Point(163, 236);
+            this.lvOutput.Name = "lvOutput";
+            this.lvOutput.Size = new System.Drawing.Size(535, 162);
+            this.lvOutput.TabIndex = 14;
+            this.lvOutput.UseCompatibleStateImageBehavior = false;
+            this.lvOutput.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Tag";
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "VR";
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Name";
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Length";
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Value";
             // 
             // DecodeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 491);
-            this.Controls.Add(this.richTextBox2);
+            this.Controls.Add(this.lvOutput);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "DecodeForm";
             this.Text = "DecodeForm";
             this.Load += new System.EventHandler(this.DecodeForm_Load);
@@ -114,6 +163,12 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListView lvOutput;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }

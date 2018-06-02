@@ -402,6 +402,7 @@ namespace DCMLIB
             return head+GetSingle(data).ToString();
         }
     }
+    //OB,OW,OF,写的方法有问题
     /// <summary>
     /// 解码解得byte
     /// </summary>

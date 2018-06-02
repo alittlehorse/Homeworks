@@ -50,6 +50,8 @@ namespace DCMLIB
         /// <summary>
         /// 所容纳的数据元素或条目
         /// </summary>
+        /// 
+        //每一个DataSet的无论子类还是父类,都内置items属性;
         protected List<DCMAbstractType> items ;
         protected TransferSyntax syntax;
         public DCMDataSet(TransferSyntax ts)   //传输语法由构造函数传入
@@ -176,10 +178,23 @@ namespace DCMLIB
             }
             return items;
         }
-        //注意,这里可能要修改方法
-        public override string ToString()
+        //文件头ToString方法；
+        public override string ToString(string head)
         {
-            return base.ToString();
+            string str = "";
+            int i = 1;
+            foreach (DCMAbstractType item in items)
+            {
+                if (item.gtag != 0x0002)
+                {
+                    break;
+                }
+                str += "\n" + head + "Head" + i.ToString() + "\n";
+                str += item.ToString(head);
+                i++;
+            }
+
+            return str;
         }
     }
     public class DCMFile : DCMDataSet
@@ -200,6 +215,7 @@ namespace DCMLIB
             //跳过128字节前导符(idx=128)，读取4字节的”DICM”
             idx = 128;
             //***
+            idx += 4;
             //用ExplicitVRLittleEndian对象实例化filemeta对象，通过其Decode方法从data中读取头元素
             syntax = new ExplicitVRLittleEndian();
             filemeta= new DCMFileMeta(syntax);
@@ -215,9 +231,22 @@ namespace DCMLIB
         //注意,这里可能要修改方法
         public override string ToString(string head)
         {
-            String headstr = filemeta.ToString();
-            String itemstring =  base.ToString();
-            return headstr+ itemstring;
+            //调用文件头的ToString
+            String headstr = filemeta.ToString("");
+            string str = "";
+            foreach (DCMAbstractType item in items)
+            {
+                if (item != null)
+                {
+                    if (item.gtag == 0x0002)
+                    { 
+                    continue;
+                    }
+                    if (str != "") str += "\n";  //两个数据元素之间用换行符分割
+                    str += item.ToString(head);
+                }
+            }
+            return headstr+ str;
         }
     }
 
