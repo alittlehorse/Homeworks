@@ -50,8 +50,6 @@ namespace DCMLIB
         /// <summary>
         /// 所容纳的数据元素或条目
         /// </summary>
-        /// 
-        //每一个DataSet的无论子类还是父类,都内置items属性;
         protected List<DCMAbstractType> items ;
         protected TransferSyntax syntax;
         public DCMDataSet(TransferSyntax ts)   //传输语法由构造函数传入
@@ -172,29 +170,16 @@ namespace DCMLIB
                 {
                     //但要注意最后那条数据元素必须通过修改idx退回到缓冲区
                     idx -= item.length + 2 + 2 + 4;
-                    //value+两个字节的值长度+2个字节的VR+tag
+                    //value+2个字节的值长度+2个字节的VR+四字节的tag
                     break;
                 }
             }
             return items;
         }
-        //文件头ToString方法；
-        public override string ToString(string head)
-        {
-            string str = "";
-            int i = 1;
-            foreach (DCMAbstractType item in items)
-            {
-                if (item.gtag != 0x0002)
-                {
-                    break;
-                }
-                str += "\n" + head + "Head" + i.ToString() + "\n";
-                str += item.ToString(head);
-                i++;
-            }
 
-            return str;
+        public override String ToString()
+        {
+            return base.ToString();
         }
     }
     public class DCMFile : DCMDataSet
@@ -214,8 +199,10 @@ namespace DCMLIB
             data = DecodeForm.HexStringToByteArray(Text);
             //跳过128字节前导符(idx=128)，读取4字节的”DICM”
             idx = 128;
-            //***
+            DCMDataElement de = new DCMDataElement();
+            de.name = data[idx].ToString() + data[idx + 1].ToString() + data[idx + 2].ToString() + data[idx + 3].ToString();
             idx += 4;
+            items.Add(de);
             //用ExplicitVRLittleEndian对象实例化filemeta对象，通过其Decode方法从data中读取头元素
             syntax = new ExplicitVRLittleEndian();
             filemeta= new DCMFileMeta(syntax);
@@ -228,25 +215,12 @@ namespace DCMLIB
             base.Decode(data, ref idx);
             return items;
         }
-        //注意,这里可能要修改方法
-        public override string ToString(string head)
+
+        public override String ToString(string head)
         {
-            //调用文件头的ToString
-            String headstr = filemeta.ToString("");
-            string str = "";
-            foreach (DCMAbstractType item in items)
-            {
-                if (item != null)
-                {
-                    if (item.gtag == 0x0002)
-                    { 
-                    continue;
-                    }
-                    if (str != "") str += "\n";  //两个数据元素之间用换行符分割
-                    str += item.ToString(head);
-                }
-            }
-            return headstr+ str;
+            String headstr = filemeta.ToString();
+            String itemstring =  base.ToString();
+            return headstr+ itemstring;
         }
     }
 

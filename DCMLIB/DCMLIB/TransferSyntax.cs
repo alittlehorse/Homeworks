@@ -51,10 +51,9 @@ namespace DCMLIB
             if (tag == "(FFFE,E000)")
             {
                 DCMDataItem sqitem = new DCMDataItem(this);
-                sqitem.gtag = element.gtag;
-                sqitem.etag = element.etag;
                 uint length = vrdecoder.GetUInt32(data, ref idx);
-                sqitem.length = length;
+                //element.length = length;
+                //想了一下这句,还是不要了吧,因为谁知道是个什么鬼呢?
                 uint offset = idx;
                 //idx小于value长度时,不断地调用Decode方法来解锁;
                 while (idx - offset < length)
@@ -62,7 +61,7 @@ namespace DCMLIB
                     //递归,不断地解码
                     //解出Tag不为DataElemt类型时,重复的递归
                     DCMAbstractType sqelem = Decode(data, ref idx);
-                    if (sqelem.gtag == 0xfffe && sqelem.etag == 0xe00d) break;
+                    if (sqelem.gtag == 0xfffe && sqelem.etag == 0xe00d) break;//这句有问题
                     sqitem[0]=sqelem;
                 }
                 return sqitem;

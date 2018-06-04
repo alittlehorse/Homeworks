@@ -35,7 +35,6 @@ namespace DCMLIB
         /// <para>(0000,0100) Command Field</para>
         /// <para> VR: US VM:1</para>
         /// </summary>
-        /// 
         public const uint CommandField = 256;
         /// <summary>
         /// <para>(0000,0110) Message ID</para>

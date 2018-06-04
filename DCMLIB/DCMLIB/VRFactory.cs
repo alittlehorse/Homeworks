@@ -6,15 +6,14 @@ using System.Collections;
 
 namespace DCMLIB
 {
-    public class VRFactory
+    public  class VRFactory
     {
-        protected TransferSyntax syntax;
-        public Hashtable VRs = new Hashtable();
+        protected  TransferSyntax syntax;
+        public  Hashtable VRs = new Hashtable();
         public VRFactory(TransferSyntax syn)
         {
             syntax = syn;
         }
-
 
 
         /// <summary>
@@ -29,12 +28,12 @@ namespace DCMLIB
             else
             {
                 VR vr = CreateVR(key);
-                VRs.Add(key, vr);
+                VRs.Add(key,vr);
                 return vr;
             }
         }
 
-        public VR CreateVR(string key)
+        public  VR CreateVR(string key)
         {
             {
                 VR vr = null;
