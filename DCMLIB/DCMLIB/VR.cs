@@ -99,10 +99,16 @@ namespace DCMLIB
         /// <returns>返回切割数组值为Value,并且指针指向长度结束处</returns>
         public virtual byte[] GetValue(byte[] data, ref uint idx, uint lenth)
         {
-
-            byte[] buff = ArrayHelper.SplitArray(data, idx, lenth + idx - 1);
-            idx += lenth;
-            return buff;
+            if (lenth != 0)
+            {
+                byte[] buff = ArrayHelper.SplitArray(data, idx, lenth + idx - 1);
+                idx += lenth;
+                return buff;
+            }
+            else
+            {
+                return null;
+            }
         }
         /// <summary>
         /// 这些Get系列的方法,传递进来的byte[]是已经切割好的只剩下Value未解出的原数组
@@ -402,6 +408,7 @@ namespace DCMLIB
             return head+GetSingle(data).ToString();
         }
     }
+    //OB,OW,OF,写的方法有问题
     /// <summary>
     /// 解码解得byte
     /// </summary>
@@ -410,7 +417,14 @@ namespace DCMLIB
         public OB(TransferSyntax syntax) : base(syntax) { }
         public override string GetString(byte[] data, String head)
         {
-            return head+ Encoding.Default.GetString(data, 0, data.Length);
+            uint i =0;
+            short result = 0;
+            while (i < data.Length)
+            {
+                result += (short)data[i];
+
+            }
+            return head + result;
         }
     }
     /// <summary>
@@ -421,7 +435,16 @@ namespace DCMLIB
         public OF(TransferSyntax syntax) : base(syntax) { }
         public override string GetString(byte[] data, String head)
         {
-            return head+GetSingle(data).ToString();
+            uint i = 0;
+            Int32 result = 0;
+            while (i < data.Length - 1)
+            {
+                byte[] buff = ArrayHelper.SplitArray(data, i, i + 3);
+                Int32 temp = GetInt32(buff);
+                result += temp;
+                i += 2;
+            }
+            return head + result.ToString();
         }
     }
     public class OW : LongVR
@@ -429,7 +452,16 @@ namespace DCMLIB
         public OW(TransferSyntax syntax) : base(syntax) { }
         public override string GetString(byte[] data, String head)
         {
-            return head+GetDouble(data).ToString();
+            uint i = 0;
+            Int16 result = 0;
+            while (i < data.Length - 1)
+            {
+                byte[] buff = ArrayHelper.SplitArray(data, i, i + 1);
+                Int16 temp = GetInt16(buff);
+                result += temp;
+                i += 2;
+            }
+            return head + result.ToString();
         }
     }
     public class UN : LongVR
@@ -580,7 +612,14 @@ namespace DCMLIB
         }
         public override string GetString(byte[] data, String head)
         {
-            return head+Encoding.Default.GetString(data, 0, data.Length);
+            if (data != null)
+            {
+                return head + Encoding.Default.GetString(data, 0, data.Length);
+            }
+            else
+            {
+                return "";
+            }
         }
     }
     public class TS:VR
@@ -591,7 +630,14 @@ namespace DCMLIB
         }
         public override string GetString(byte[] data, String head)
         {
-                return head+Encoding.Default.GetString(data, 0, data.Length);
+            if (data != null)
+            {
+                return head + Encoding.Default.GetString(data, 0, data.Length);
+            }
+            else
+            {
+                return "";
+            }
 
         }
     }
@@ -603,11 +649,26 @@ namespace DCMLIB
         }
         public override string GetString(byte[] data, String head)
         {
-            return head + Encoding.Default.GetString(data, 0, data.Length);
+            if (data != null)
+            {
+                return head + Encoding.Default.GetString(data, 0, data.Length);
+            }
+            else
+            {
+                return "";
+            }
 
         }
+
     }
 
-
+    public class FL : VR
+    {
+        public FL(TransferSyntax syntax) : base(syntax) { }
+        public override string GetString(byte[] data, String head)
+        {
+            return head + GetSingle(data).ToString();
+        }
+    }
 
 }

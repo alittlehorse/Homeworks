@@ -6,3 +6,29 @@ E:\Visual Studio 2017 File\DCMLIB\DCMLIB\obj\Debug\DCMLIB.csproj.CoreCompileInpu
 E:\Visual Studio 2017 File\DCMLIB\DCMLIB\obj\Debug\DCMLIB.pdb
 E:\Visual Studio 2017 File\DCMLIB\DCMLIB\bin\Debug\DCMLIB.exe
 E:\Visual Studio 2017 File\DCMLIB\DCMLIB\obj\Debug\DCMLIB.exe
+C:\Users\Administrator\Downloads\Homeworks-master\Homeworks-master\DCMLIB\DCMLIB\bin\Debug\DCMLIB.exe.config
+C:\Users\Administrator\Downloads\Homeworks-master\Homeworks-master\DCMLIB\DCMLIB\obj\Debug\DCMLIB.exe
+C:\Users\Administrator\Downloads\Homeworks-master\Homeworks-master\DCMLIB\DCMLIB\obj\Debug\DCMLIB.pdb
+C:\Users\Administrator\Downloads\Homeworks-master\Homeworks-master\DCMLIB\DCMLIB\bin\Debug\DCMLIB.exe
+C:\Users\Administrator\Downloads\Homeworks-master\Homeworks-master\DCMLIB\DCMLIB\bin\Debug\DCMLIB.pdb
+C:\Users\Administrator\Downloads\Homeworks-master\Homeworks-master\DCMLIB\DCMLIB\obj\Debug\DCMLIB.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Downloads\Homeworks-master\Homeworks-master\DCMLIB\DCMLIB\obj\Debug\DCMLIB.DecodeForm.resources
+C:\Users\Administrator\Downloads\Homeworks-master\Homeworks-master\DCMLIB\DCMLIB\obj\Debug\DCMLIB.csproj.GenerateResource.Cache
+E:\github\Homeworks\DCMLIB\DCMLIB\bin\Debug\DCMLIB.exe.config
+E:\github\Homeworks\DCMLIB\DCMLIB\bin\Debug\DCMLIB.exe
+E:\github\Homeworks\DCMLIB\DCMLIB\bin\Debug\DCMLIB.pdb
+E:\github\Homeworks\DCMLIB\DCMLIB\obj\Debug\DCMLIB.csprojAssemblyReference.cache
+E:\github\Homeworks\DCMLIB\DCMLIB\obj\Debug\DCMLIB.DecodeForm.resources
+E:\github\Homeworks\DCMLIB\DCMLIB\obj\Debug\DCMLIB.csproj.GenerateResource.cache
+E:\github\Homeworks\DCMLIB\DCMLIB\obj\Debug\DCMLIB.csproj.CoreCompileInputs.cache
+E:\github\Homeworks\DCMLIB\DCMLIB\obj\Debug\DCMLIB.exe
+E:\github\Homeworks\DCMLIB\DCMLIB\obj\Debug\DCMLIB.pdb
+E:\github\DCMLIB\DCMLIB\bin\Debug\DCMLIB.exe.config
+E:\github\DCMLIB\DCMLIB\bin\Debug\DCMLIB.exe
+E:\github\DCMLIB\DCMLIB\bin\Debug\DCMLIB.pdb
+E:\github\DCMLIB\DCMLIB\obj\Debug\DCMLIB.csprojAssemblyReference.cache
+E:\github\DCMLIB\DCMLIB\obj\Debug\DCMLIB.DecodeForm.resources
+E:\github\DCMLIB\DCMLIB\obj\Debug\DCMLIB.csproj.GenerateResource.cache
+E:\github\DCMLIB\DCMLIB\obj\Debug\DCMLIB.csproj.CoreCompileInputs.cache
+E:\github\DCMLIB\DCMLIB\obj\Debug\DCMLIB.exe
+E:\github\DCMLIB\DCMLIB\obj\Debug\DCMLIB.pdb
