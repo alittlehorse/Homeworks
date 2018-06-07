@@ -23,6 +23,16 @@ namespace DCMLIB
         
         public VR vrparser ;
         public abstract string ToString(string head);
+        public virtual void WriteValue<T>(T[] val)
+        {
+            value = vrparser.WriteValue<T>(val);
+            length = (uint)value.Length;
+        }
+
+        public virtual T[] ReadValue<T>()
+        {
+            return vrparser.ReadValue<T>(value);
+        }
     }
 
     public class DCMDataElement : DCMAbstractType

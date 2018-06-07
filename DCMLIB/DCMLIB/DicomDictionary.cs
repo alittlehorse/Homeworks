@@ -30,12 +30,10 @@ namespace DCMLIB
 
         }
 
-        public DicomDictonaryEntry GetEntry(string tag)
+        public DicomDictonaryEntry GetEntry(ushort gtag,ushort etag)
         {
-            string newtag = '"' + tag + '"';
-            dde = dict.Find(delegate (DicomDictonaryEntry dde1) {
-                return dde1.tag == newtag;
-            });
+            string newtag = '"' + "(" + gtag.ToString("X4") + "," + etag.ToString("X4") + ")" + '"';
+            dde = dict.Find(dde => dde.tag== newtag);
             return dde;
         }
 

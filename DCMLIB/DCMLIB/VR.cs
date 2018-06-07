@@ -25,30 +25,14 @@ namespace DCMLIB
         /// <returns></returns>
         public ushort GetGroupTag(byte[] data, ref uint idx)
         {
-            ushort gtag = 0;
-            if (syntax.isBE == false)
-            {
-                gtag = (ushort)(data[idx] + data[idx + 1] * 256);
-            }
-            if (syntax.isBE == true)
-            {
-                gtag = (ushort)(data[idx ] * 256 + data[idx+1]);
-            }
-            idx += 2;
+            ushort gtag = GetUInt16(data, ref idx);
+
             return gtag;
         }
         public ushort GetElementTag(byte[] data, ref uint idx)
         {
-            ushort etag = 0;
-            if (syntax.isBE == false)
-            {
-                etag = (ushort)(data[idx] + data[idx + 1] * 256);
-            }
-            if (syntax.isBE == true)
-            {
-                etag = (ushort)(data[idx ] * 256 + data[idx+1]);
-            }
-            idx += 2;
+            ushort etag = GetUInt16(data, ref idx);
+
             return etag;
         }
 
@@ -62,29 +46,17 @@ namespace DCMLIB
         public virtual uint GetLength(byte[] data, ref uint idx, string vrstring)
         {
             uint len = 0;
-            //默认语法
-            if (syntax.isExplicit == false && syntax.isBE == false)
+            //隐式VR
+            if (syntax.isExplicit == false )
             {
                 len = GetUInt32(data, ref idx);
             }
-            //BE,隐式VR
-            else if (syntax.isExplicit == false && syntax.isBE == true)
-            {
-                len = GetUInt32(data, ref idx);
-            }
-            //LE,显示VR
-            else if (syntax.isExplicit == true && syntax.isBE == false)
+
+            //显示VR
+            else if (syntax.isExplicit == true)
             {
 
                 len = GetUInt16(data, ref idx);
-
-            }
-            //BE,显示VR
-            else
-            {
-
-                len = len = GetUInt16(data, ref idx);
-
             }
             return len;
         }
@@ -110,8 +82,14 @@ namespace DCMLIB
                 return null;
             }
         }
+        public abstract byte[] WriteValue<T>(T[] val);
+        //ReadValue方法和GetValue方法是两个不同的方法
+        //ReadValue方法返回各自传输语法中的值
+        //而GetValue返回的是byte[]
+        public abstract T[] ReadValue<T>(byte[] data);
         /// <summary>
-        /// 这些Get系列的方法,传递进来的byte[]是已经切割好的只剩下Value未解出的原数组
+        /// 这些GetXXX(byte[] data)系列的方法,传递进来的byte[]是已经切割好的只剩下Value未解出的原数组
+        /// 并不改变idx
         /// </summary>
         /// <param name="data">已经切割后的byte[]数组</param>
         /// <returns></returns>
@@ -119,11 +97,13 @@ namespace DCMLIB
         public UInt16 GetUInt16(byte[] data)
         {
             UInt16 number = 0;
-            if (syntax.isBE == false) { number = BitConverter.ToUInt16(data, 0); }
-            else
+            if (syntax.isBE == false)
             {
-                Array.Reverse(data);
-                number = BitConverter.ToUInt16(data, 0);
+                number = (ushort)(data[0] + data[ 1] * 256);
+            }
+            if (syntax.isBE == true)
+            {
+                number = (ushort)(data[0] * 256 + data[1]);
             }
             return number;
         }
@@ -152,11 +132,13 @@ namespace DCMLIB
         public Int16 GetInt16(byte[] data)
         {
             Int16 number = 0;
-            if (syntax.isBE == false) { number = BitConverter.ToInt16(data, 0); }
-            else
+            if (syntax.isBE == false)
             {
-                Array.Reverse(data);
-                number = BitConverter.ToInt16(data, 0);
+                number = (Int16)(data[0] + data[1] * 256);
+            }
+            if (syntax.isBE == true)
+            {
+                number = (Int16)(data[0] * 256 + data[1]);
             }
             return number;
         }
@@ -182,6 +164,7 @@ namespace DCMLIB
             }
             return number;
         }
+
         public String GetVR(byte[] data, ref uint idx)
         {
             if (syntax.isExplicit == true)
@@ -192,7 +175,7 @@ namespace DCMLIB
             }
             else
             {
-                return " ";
+                return "";
             }
         }
         /// <summary>
@@ -204,13 +187,13 @@ namespace DCMLIB
         public UInt16 GetUInt16(byte[] data,ref uint idx)
         {
             UInt16 number = 0;
-            Int32 temp_idx = int.Parse(idx.ToString());
-            if (syntax.isBE == false) { number = BitConverter.ToUInt16(data, temp_idx); }
-            else
+            if (syntax.isBE == false)
             {
-               byte[] buff =  ArrayHelper.SplitArray(data, idx, idx + 1);
-                Array.Reverse(buff);
-                number = BitConverter.ToUInt16(buff, 0);
+                number = (ushort)(data[idx] + data[idx + 1] * 256);
+            }
+            if (syntax.isBE == true)
+            {
+                number = (ushort)(data[idx] * 256 + data[idx + 1]);
             }
             idx += 2;
             return number;
@@ -221,20 +204,7 @@ namespace DCMLIB
         /// <param name="data"></param>
         /// <param name="idx">内部处理会加上6</param>
         /// <returns></returns>
-        public UInt64 GetUInt64(byte[] data, ref uint idx)
-        {
-            UInt64 number = 0;
-            Int32 temp_idx = int.Parse(idx.ToString());
-            if (syntax.isBE == false) { number = BitConverter.ToUInt64(data, temp_idx); }
-            else
-            {
-                byte[] buff = ArrayHelper.SplitArray(data, idx, idx + 5);
-                Array.Reverse(buff);
-                number = BitConverter.ToUInt64(buff, 0);
-            }
-            idx += 6;
-            return number;
-        }
+
         /// <summary>
         /// 用于解码4字节length是用到此方法
         /// </summary>
@@ -255,58 +225,68 @@ namespace DCMLIB
             idx += 4;
             return number;
         }
-        
-    }
-
-
-
-
-
-
-
-    /// <summary>
-    /// longVR继承自VR,作为OB OF OW SQ UT UN等具体vr子类的直接基类
-    /// </summary>
-    /// 
-    public abstract class LongVR : VR
-    {
-        public LongVR(TransferSyntax syntax) : base(syntax) { }
-
-        public override uint GetLength(byte[] data, ref uint idx, string vrstring)
+        public Int32 GetInt32(byte[] data,ref uint idx)
         {
-            uint len = 0;
-            //默认语法
-            if (syntax.isExplicit == false && syntax.isBE == false)
-            {
-                len = GetUInt32(data, ref idx);
-
-            }
-            //BE,隐式VR
-            else if (syntax.isExplicit == false && syntax.isBE == true)
-            {
-                len = GetUInt32(data, ref idx);
-
-            }
-            //LE,显示VR
-            else if (syntax.isExplicit == true && syntax.isBE == false)
-            {
-
-                idx += 2;
-                len = GetUInt32(data, ref idx);
-
-
-            }
-            //BE,显示VR
+            Int32 number = 0;
+            if (syntax.isBE == false) { number = BitConverter.ToInt32(data, (int)idx); }
             else
             {
-                idx += 2;
-                len = GetUInt32(data,ref idx);
-
+                Array.Reverse(data);
+                number = BitConverter.ToInt32(data, (int)idx);
             }
-            return len;
+            return number;
+        }
+        public Int16 GetInt16(byte[] data,ref uint idx)
+        {
+            Int16 number = 0;
+            if (syntax.isBE == false)
+            {
+                number = (Int16)(data[idx] + data[idx+1] * 256);
+            }
+            if (syntax.isBE == true)
+            {
+                number = (Int16)(data[idx] * 256 + data[idx+1]);
+            }
+            return number;
         }
 
+        //现在还用不到这个方法
+        public UInt64 GetUInt64(byte[] data, ref uint idx)
+        {
+            UInt64 number = 0;
+            if (syntax.isBE == false) { number = BitConverter.ToUInt64(data, (int)idx); }
+            else
+            {
+                byte[] buff = ArrayHelper.SplitArray(data, idx, idx + 7);
+                Array.Reverse(buff);
+                number = BitConverter.ToUInt64(buff, 0);
+            }
+            idx += 8;
+            return number;
+        }
+        public Int64 GetInt64(byte[] data, ref uint idx)
+        {
+            Int64 number = 0;
+            if (syntax.isBE == false) { number = BitConverter.ToInt64(data, (int)idx); }
+            else
+            {
+                byte[] buff = ArrayHelper.SplitArray(data, idx, idx + 7);
+                Array.Reverse(buff);
+                number = BitConverter.ToInt64(buff, 0);
+            }
+            idx += 8;
+            return number;
+        }
     }
+
+
+
+
+
+
+
+
+   
     public class UL : VR
     {
         public UL(TransferSyntax syntax) : base(syntax) { }
@@ -314,6 +294,31 @@ namespace DCMLIB
         {
             String str = GetUInt32(data).ToString();
             return head + str;
+        }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(UInt32))
+            {
+                UInt32[] val = new UInt32[1];
+                val[0] = GetUInt32(data);
+                return val as T[];
+            }
+            throw new NotSupportedException();
+        }
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(UInt32))
+            {
+                UInt32[] vals = val as UInt32[];
+                //val的值只在val[0]中,因为他是强制转化为数组
+                byte[] data = BitConverter.GetBytes(vals[0]);
+                if (syntax.isBE)
+                {
+                    Array.Reverse(data);
+                }
+                return data;
+            }
+            throw new NotSupportedException();
         }
     }
     public class US : VR
@@ -324,9 +329,33 @@ namespace DCMLIB
             String str = GetUInt16(data).ToString();
             return head + str;
         }
-
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(UInt16))
+            {
+                UInt16[] val = new UInt16[1];
+                val[0] = GetUInt16(data);
+                return val as T[];
+            }
+            throw new NotSupportedException();
+        }
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(UInt16))
+            {
+                UInt16[] vals = val as UInt16[];
+                //val的值只在val[0]中,因为他是强制转化为数组
+                byte[] data = BitConverter.GetBytes(vals[0]);
+                if (syntax.isBE)
+                {
+                    Array.Reverse(data);
+                }
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
-
+    //AS AgeString 是String类型
     public class AS : VR
     {
         public AS(TransferSyntax syntax) : base(syntax) { }
@@ -341,9 +370,31 @@ namespace DCMLIB
                 return "";
             }
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = new string[1];
+                //引用自身的GetString方法
+                vals[0] = GetString(data, "");
+                return vals as T[];
+            }
+            throw new NotSupportedException();
+        }
+        //String类型不用管是否为BE或者LE
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = val as String[];
+                byte[] data = Encoding.Default.GetBytes(vals[0]);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
 
     }
-
+//DA是Date类型
     public class DA : VR
     {
         public DA(TransferSyntax syntax) : base(syntax) { }
@@ -356,9 +407,30 @@ namespace DCMLIB
             string resualt = year + "-" + month + "-" + day;
             return head + resualt;
         }
-
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(DateTime))
+            {
+                String dataString = GetString(data, "");
+                DateTime[] vals = new DateTime[1];
+                vals[0] = Convert.ToDateTime(dataString);
+                return vals as T[];
+            }
+            throw new NotSupportedException();
+        }
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(DateTime))
+            {
+                DateTime[] vals = val as DateTime[];
+                String temp = vals[0].ToString().Replace("-", "").Substring(0,8);
+                byte[] data = Encoding.Default.GetBytes(temp);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
-
+//Decimal String
     public class DS : VR
     {
         public DS(TransferSyntax syntax) : base(syntax) { }
@@ -367,17 +439,65 @@ namespace DCMLIB
             String str = Encoding.Default.GetString(data, 0, data.Length);
             return head + str;
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                //还存在字符串数组吗?
+                String val = "";
+                //引用自身的GetString方法
+                val = GetString(data, "");
+                return val as T[];
+            }
+            throw new NotSupportedException();
+        }
+        //String类型不用管是否为BE或者LE
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String vals = val as String;
+                byte[] data = Encoding.Default.GetBytes(vals);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
-
+//Float Point Double
     public class FD : VR
     {
         public FD(TransferSyntax syntax) : base(syntax) { }
         public override string GetString(byte[] data, String head)
         {
             return head+GetDouble(data).ToString();
-
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(Double))
+            {
+                Double[] val = new Double[1];
+                val[0] = GetDouble(data);
+                return val as T[];
+            }
+            throw new NotSupportedException();
+        }
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(Double))
+            {
+                Double[] vals = val as Double[];
+                byte[] data = BitConverter.GetBytes(vals[0]);
+                if (syntax.isBE)
+                {
+                    Array.Reverse(data);
+                }
+                return data;
+            }
+            throw new NotSupportedException();
+        }
+
     }
+//DateTime
     public class DT : VR
     {
         public DT(TransferSyntax syntax) : base(syntax) { }
@@ -393,8 +513,32 @@ namespace DCMLIB
             string resualt = year + "-" + month + "-" + day + ":" + hour + ":" + minute + ":" + second;
             return head + resualt;
         }
-
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(DateTime))
+            {
+                String dataString = GetString(data, "");
+                DateTime val = Convert.ToDateTime(dataString);
+                return val as T[];
+            }
+            throw new NotSupportedException();
+        }
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(DateTime))
+            {
+                DateTime[] vals = val as DateTime[];
+                //转化为时间戳
+                String temp = vals[0].ToString().Replace("-", "").Replace(":","").Replace(" ","");
+                byte[] data = Encoding.Default.GetBytes(temp);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
+
+// Signed Short
+
     public class SS : VR
     {
         public SS(TransferSyntax syntax) : base(syntax) { }
@@ -402,10 +546,33 @@ namespace DCMLIB
         {
             return head+GetInt16(data).ToString();
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(Int16))
+            {
+                Int16[] val = new Int16[1];
+                val[0] = GetInt16(data);
+                return val as T[];
+            }
+            throw new NotSupportedException();
+        }
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(Int16))
+            {
+                Int16[] vals = val as Int16[];
+                //val的值只在val[0]中,因为他是强制转化为数组
+                byte[] data = BitConverter.GetBytes(vals[0]);
+                if (syntax.isBE)
+                {
+                    Array.Reverse(data);
+                }
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
-    /// <summary>
-    /// 解码解得单浮点Single
-    /// </summary>
+//Float Point Single
     public class FS : VR
     {
         public FS(TransferSyntax syntax) : base(syntax) { }
@@ -413,86 +580,32 @@ namespace DCMLIB
         {
             return head+GetSingle(data).ToString();
         }
-    }
-    //OB,OW,OF,写的方法有问题
-    /// <summary>
-    /// 解码解得byte
-    /// </summary>
-    public class OB : LongVR
-    {
-        public OB(TransferSyntax syntax) : base(syntax) { }
-        public override string GetString(byte[] data, String head)
+        public override T[] ReadValue<T>(byte[] data)
         {
-            uint i =0;
-            short result = 0;
-            while (i < data.Length)
+            if (typeof(T) == typeof(Single))
             {
-                result += (short)data[i];
-                i += 1;
+                Single[] val = new Single[1];
+                val[0] = GetSingle(data);
+                return val as T[];
             }
-            return head + result;
+            throw new NotSupportedException();
+        }
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(Single))
+            {
+                Single[] vals = val as Single[];
+                byte[] data = BitConverter.GetBytes(vals[0]);
+                if (syntax.isBE)
+                {
+                    Array.Reverse(data);
+                }
+                return data;
+            }
+            throw new NotSupportedException();
         }
     }
-    /// <summary>
-    /// 解Value的得到Single
-    /// </summary>
-    public class OF : LongVR
-    {
-        public OF(TransferSyntax syntax) : base(syntax) { }
-        public override string GetString(byte[] data, String head)
-        {
-            uint i = 0;
-            Int32 result = 0;
-            while (i < data.Length - 1)
-            {
-                byte[] buff = ArrayHelper.SplitArray(data, i, i + 3);
-                Int32 temp = GetInt32(buff);
-                result += temp;
-                i += 4;
-            }
-            return head + result.ToString();
-        }
-    }
-    public class OW : LongVR
-    {
-        public OW(TransferSyntax syntax) : base(syntax) { }
-        public override string GetString(byte[] data, String head)
-        {
-            uint i = 0;
-            Int16 result = 0;
-            while (i < data.Length - 1)
-            {
-                byte[] buff = ArrayHelper.SplitArray(data, i, i + 1);
-                Int16 temp = GetInt16(buff);
-                result += temp;
-                i += 2;
-            }
-            return head + result.ToString();
-        }
-    }
-    public class UN : LongVR
-    {
-        public UN(TransferSyntax syntax) : base(syntax) { }
-        public override string GetString(byte[] data, String head)
-        {
-            if (data != null)
-            {
-                return head + Encoding.Default.GetString(data, 0, data.Length);
-            }
-            else
-            {
-                return "";
-            }
-        }
-    }
-    public class UT : LongVR
-    {
-        public UT(TransferSyntax syntax) : base(syntax) { }
-        public override string GetString(byte[] data, String head)
-        {
-            return head+Encoding.Default.GetString(data, 0, data.Length);
-        }
-    }
+//Short String <=16   
     public class SH : VR
     {
         public SH(TransferSyntax syntax) : base(syntax) { }
@@ -507,8 +620,30 @@ namespace DCMLIB
                 return "";
             }
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = new string[1];
+                //引用自身的GetString方法
+                vals[0] = GetString(data, "");
+                return vals as T[];
+            }
+            throw new NotSupportedException();
+        }
+        //String类型不用管是否为BE或者LE
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = val as String[];
+                byte[] data = Encoding.Default.GetBytes(vals[0]);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
-
+//Short Text <=1024
     public class ST : VR
     {
         public ST(TransferSyntax syntax) : base(syntax) { }
@@ -523,8 +658,30 @@ namespace DCMLIB
                 return "";
             }
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = new string[1];
+                //引用自身的GetString方法
+                vals[0] = GetString(data, "");
+                return vals as T[];
+            }
+            throw new NotSupportedException();
+        }
+        //String类型不用管是否为BE或者LE
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = val as String[];
+                byte[] data = Encoding.Default.GetBytes(vals[0]);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
-
+//LongText<=10240
     public class LT : VR
     {
         public LT(TransferSyntax syntax) : base(syntax) { }
@@ -539,8 +696,30 @@ namespace DCMLIB
                 return "";
             }
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = new string[1];
+                //引用自身的GetString方法
+                vals[0] = GetString(data, "");
+                return vals as T[];
+            }
+            throw new NotSupportedException();
+        }
+        //String类型不用管是否为BE或者LE
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = val as String[];
+                byte[] data = Encoding.Default.GetBytes(vals[0]);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
-   
+ //Application Entity  
     public class AE : VR
     {
         public AE(TransferSyntax syntax) : base(syntax) { }
@@ -555,8 +734,30 @@ namespace DCMLIB
                 return "";
             }
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = new string[1];
+                //引用自身的GetString方法
+                vals[0] = GetString(data, "");
+                return vals as T[];
+            }
+            throw new NotSupportedException();
+        }
+        //String类型不用管是否为BE或者LE
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = val as String[];
+                byte[] data = Encoding.Default.GetBytes(vals[0]);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
-    
+ //Code String   
     public class CS : VR
     {
         public CS(TransferSyntax syntax) : base(syntax) { }
@@ -571,7 +772,31 @@ namespace DCMLIB
                 return "";
             }
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                //还存在字符串数组吗?
+                String val = "";
+                //引用自身的GetString方法
+                val = GetString(data, "");
+                return val as T[];
+            }
+            throw new NotSupportedException();
+        }
+        //String类型不用管是否为BE或者LE
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String vals = val as String;
+                byte[] data = Encoding.Default.GetBytes(vals);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
+ //Integer String
     public class IS : VR
     {
         public IS(TransferSyntax syntax) : base(syntax) { }
@@ -586,8 +811,31 @@ namespace DCMLIB
                 return "";
             }
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                //还存在字符串数组吗?
+                String val = "";
+                //引用自身的GetString方法
+                val = GetString(data, "");
+                return val as T[];
+            }
+            throw new NotSupportedException();
+        }
+        //String类型不用管是否为BE或者LE
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String vals = val as String;
+                byte[] data = Encoding.Default.GetBytes(vals);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
-
+//Signed Long
     public class SL : VR
     {
         public SL(TransferSyntax syntax) : base(syntax) { }
@@ -595,47 +843,34 @@ namespace DCMLIB
         {
             return head+GetInt32(data).ToString();
         }
-    }
-
-    public class SQ : LongVR
-    {
-        public SQ(TransferSyntax syntax) : base(syntax) { }
-        /// <summary>
-        /// SQ必须重写GetValue方法,因为传进来的参数length是由前边的Getlength方法获取的
-        /// 而SQ可能取值FFFF
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="idx"></param>
-        /// <param name="length">传入长度数值</param>
-        /// <returns></returns>
-        public override byte[] GetValue(byte[] data, ref uint idx, uint length)
+        public override T[] ReadValue<T>(byte[] data)
         {
-            uint offset = idx;
-            DCMDataSequence sq = new DCMDataSequence(syntax);
-            while (idx - offset < length)
+            if (typeof(T) == typeof(Int32))
             {
-                DCMAbstractType item = syntax.Decode(data, ref idx);
-                string tag = "(" + item.gtag.ToString("X4") + "," + item.etag.ToString("X4") + ")";
-                if (tag== "(FFFE,E0DD)")
-                    break;
-                else
-                    sq[0]= (DCMDataItem)item;
+                Int32[] val = new Int32[1];
+                val[0] = GetInt32(data);
+                return val as T[];
             }
-            GCHandle handle = GCHandle.Alloc(sq);
-            IntPtr ptr = GCHandle.ToIntPtr(handle);
-            return BitConverter.GetBytes(ptr.ToInt64());
+            throw new NotSupportedException();
         }
-        public override string GetString(byte[] data, String head)
+        public override byte[] WriteValue<T>(T[] val)
         {
-            IntPtr ptr = new IntPtr(BitConverter.ToInt64(data, 0));
-            GCHandle handle = GCHandle.FromIntPtr(ptr);
-            DCMDataSequence sq = (DCMDataSequence)handle.Target;
-            return sq.ToString(head + ">");
+            if (typeof(T) == typeof(Int32))
+            {
+                Int32[] vals = val as Int32[];
+                //val的值只在val[0]中,因为他是强制转化为数组
+                byte[] data = BitConverter.GetBytes(vals[0]);
+                if (syntax.isBE)
+                {
+                    Array.Reverse(data);
+                }
+                return data;
+            }
+            throw new NotSupportedException();
         }
-
-
-
     }
+
+ //Time  
     public class TM : VR
     {
         public TM(TransferSyntax syntax) : base(syntax) { }
@@ -645,11 +880,36 @@ namespace DCMLIB
             int hour = int.Parse(s.Substring(0, 2));
             int minute = int.Parse(s.Substring(2, 2));
             int second = int.Parse(s.Substring(4, 2));
-            string resualt = hour + "-" + minute + "-" + second;
+            string resualt = hour + ":" + minute + ":" + second;
             return head + resualt;
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(DateTime))
+            {
+                String dataString = GetString(data, "");
+                DateTime[] vals = new DateTime[1];
+                vals[0] = Convert.ToDateTime(dataString);
+                return vals as T[];
+            }
+            throw new NotSupportedException();
+        }
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(DateTime))
+            {
+                DateTime[] vals = val as DateTime[];
+                String temp = vals[0].ToString().Replace("-", "").Replace(":","").Replace(" ","").Substring(8, 6);
+                byte[] data = Encoding.Default.GetBytes(temp);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
-
+/// <summary>
+/// unique Identifier 
+/// Length:<=64
+/// </summary>
     public class UI : VR
     {
         public UI(TransferSyntax syntax) : base(syntax) { }
@@ -664,7 +924,33 @@ namespace DCMLIB
                 return "";
             }
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = new string[1];
+                //引用自身的GetString方法
+                vals[0] = GetString(data, "");
+                return vals as T[];
+            }
+            throw new NotSupportedException();
+        }
+        //String类型不用管是否为BE或者LE
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = val as String[];
+                byte[] data = Encoding.Default.GetBytes(vals[0]);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
+    /// <summary>
+    /// Long String
+    /// Length:<=64
+    /// </summary>
     public class LO : VR
     {
         public LO(TransferSyntax syntax) : base(syntax)
@@ -682,7 +968,32 @@ namespace DCMLIB
                 return "";
             }
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = new string[1];
+                //引用自身的GetString方法
+                vals[0] = GetString(data, "");
+                return vals as T[];
+            }
+            throw new NotSupportedException();
+        }
+        //String类型不用管是否为BE或者LE
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = val as String[];
+                byte[] data = Encoding.Default.GetBytes(vals[0]);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
+    /// <summary>
+    /// 特殊类,标志为私有类
+    /// </summary>
     public class TS:VR
     {
         public TS(TransferSyntax syntax) : base(syntax)
@@ -701,7 +1012,33 @@ namespace DCMLIB
             }
 
         }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = new string[1];
+                //引用自身的GetString方法
+                vals[0] = GetString(data, "");
+                return vals as T[];
+            }
+            throw new NotSupportedException();
+        }
+        //String类型不用管是否为BE或者LE
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = val as String[];
+                byte[] data = Encoding.Default.GetBytes(vals[0]);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
+/// <summary>
+/// Person Name
+/// Length:<=64
+/// </summary>
     public class PN : VR
     {
         public PN(TransferSyntax syntax) : base(syntax)
@@ -720,15 +1057,63 @@ namespace DCMLIB
             }
 
         }
-
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = new string[1];
+                //引用自身的GetString方法
+                vals[0] = GetString(data, "");
+                return vals as T[];
+            }
+            throw new NotSupportedException();
+        }
+        //String类型不用管是否为BE或者LE
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(String))
+            {
+                String[] vals = val as String[];
+                byte[] data = Encoding.Default.GetBytes(vals[0]);
+                return data;
+            }
+            throw new NotSupportedException();
+        }
     }
-
+/// <summary>
+/// Floating Point Single
+/// Length:=8
+/// </summary>
     public class FL : VR
     {
         public FL(TransferSyntax syntax) : base(syntax) { }
         public override string GetString(byte[] data, String head)
         {
             return head + GetSingle(data).ToString();
+        }
+        public override T[] ReadValue<T>(byte[] data)
+        {
+            if (typeof(T) == typeof(Single))
+            {
+                Single[] val = new Single[1];
+                val[0] = GetSingle(data);
+                return val as T[];
+            }
+            throw new NotSupportedException();
+        }
+        public override byte[] WriteValue<T>(T[] val)
+        {
+            if (typeof(T) == typeof(Single))
+            {
+                Single[] vals = val as Single[];
+                byte[] data = BitConverter.GetBytes(vals[0]);
+                if (syntax.isBE)
+                {
+                    Array.Reverse(data);
+                }
+                return data;
+            }
+            throw new NotSupportedException();
         }
     }
 

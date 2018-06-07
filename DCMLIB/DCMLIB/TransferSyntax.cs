@@ -31,11 +31,11 @@ namespace DCMLIB
 
             vrdecoder = new UL(this);
         }
-        private string encodeVR(string s)
+        private string encodeVR(ushort gtag,ushort etag)
         {
             DicomDictonaryEntry dd = new DicomDictonaryEntry();
             DicomDictionary dde = new DicomDictionary();
-            dd = dde.GetEntry(s);
+            dd = dde.GetEntry(gtag,etag);
             string vr = dd.VR;
             return vr;
         }
@@ -48,7 +48,7 @@ namespace DCMLIB
             element.etag = vrdecoder.GetElementTag(data, ref idx);
             string tag = "(" + element.gtag.ToString("X4") + "," + element.etag.ToString("X4") + ")";
 
-            if (tag == "(FFFE,E000)")
+            if (element.gtag == 0xfffe && element.etag == 0xe000)
             {
                 DCMDataItem sqitem = new DCMDataItem(this);
                 sqitem.gtag = element.gtag;
@@ -67,7 +67,7 @@ namespace DCMLIB
                 }
                 return sqitem;
             }
-            else if (tag == "(FFFE,E00D)")  //序列结束标记
+            else if (element.gtag == 0xfffe && element.etag == 0xe00d)  //序列结束标记
             {
                 element.vr = "UL";//回归初始状态
                 element.length = vrdecoder.GetUInt32(data, ref idx); 
@@ -75,7 +75,7 @@ namespace DCMLIB
                 //且不用解出Value
                 return element;
             }
-            else if (tag == "(FFFE,E0DD)")
+            else if (element.gtag == 0xfffe && element.etag == 0xe0dd)
             {
                 element.vr = "UL";//回归初始状态
                 element.length = vrdecoder.GetUInt32(data, ref idx); 
@@ -87,7 +87,7 @@ namespace DCMLIB
 
             //查数据字典得到VR,Name,VM
             element.vr = vrdecoder.GetVR(data, ref idx);
-            DicomDictonaryEntry entry = dictionary.GetEntry(tag);
+            DicomDictonaryEntry entry = dictionary.GetEntry(element.gtag, element.etag);
             if (entry != null)
             {
                 element.vr = entry.VR;
