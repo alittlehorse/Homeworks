@@ -56,6 +56,12 @@
     </Compile>
     <Compile Include="DicomDictionary.cs" />
     <Compile Include="DicomTags.cs" />
+    <Compile Include="frmImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImage.Designer.cs">
+      <DependentUpon>frmImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="LongVR.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="VR.cs" />
@@ -66,6 +72,9 @@
   <ItemGroup>
     <EmbeddedResource Include="DecodeForm.resx">
       <DependentUpon>DecodeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImage.resx">
+      <DependentUpon>frmImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

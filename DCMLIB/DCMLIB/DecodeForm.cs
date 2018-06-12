@@ -95,19 +95,40 @@ namespace DCMLIB
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DCMFile dcm = new DCMFile(@".//gsps.dcm");
-            uint idx = 0;
-            dcm.Decode(null,ref idx);
-            string str = dcm.ToString("").Replace('\0', ' ');
-            string[] lines = str.Split('\n');
-            lvOutput.Items.Clear();
-            for (int i = 0; i < lines.Length; i++)
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                ListViewItem item = new ListViewItem(lines[i].Split('\t'));
-                lvOutput.Items.Add(item);
+                String FileString = dialog.FileName;
+                DCMFile dcm = new DCMFile(FileString);
+                uint idx = 0;
+                dcm.Decode(null, ref idx);
+                string str = dcm.ToString("").Replace('\0', ' ');
+                string[] lines = str.Split('\n');
+                lvOutput.Items.Clear();
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    ListViewItem item = new ListViewItem(lines[i].Split('\t'));
+                    lvOutput.Items.Add(item);
+                }
             }
+            else MessageBox.Show("请选择文件");
+           
 
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                String FileString = dialog.FileName;
+                DCMFile dcm = new DCMFile(FileString);
+                uint idx = 0;
+                dcm.Decode(null, ref idx);
+                frmImage form = new frmImage(dcm);
+                form.Show();
+            }
         }
     }
 }

@@ -32,3 +32,4 @@ E:\github\DCMLIB\DCMLIB\obj\Debug\DCMLIB.csproj.GenerateResource.cache
 E:\github\DCMLIB\DCMLIB\obj\Debug\DCMLIB.csproj.CoreCompileInputs.cache
 E:\github\DCMLIB\DCMLIB\obj\Debug\DCMLIB.exe
 E:\github\DCMLIB\DCMLIB\obj\Debug\DCMLIB.pdb
+E:\github\DCMLIB\DCMLIB\obj\Debug\DCMLIB.frmImage.resources

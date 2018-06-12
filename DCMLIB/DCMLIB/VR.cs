@@ -234,6 +234,7 @@ namespace DCMLIB
                 Array.Reverse(data);
                 number = BitConverter.ToInt32(data, (int)idx);
             }
+            idx += 4;
             return number;
         }
         public Int16 GetInt16(byte[] data,ref uint idx)
@@ -241,12 +242,13 @@ namespace DCMLIB
             Int16 number = 0;
             if (syntax.isBE == false)
             {
-                number = (Int16)(data[idx] + data[idx+1] * 256);
+                number = (Int16)(data[idx] + (data[idx+1]<<8));
             }
             if (syntax.isBE == true)
             {
-                number = (Int16)(data[idx] * 256 + data[idx+1]);
+                number = (Int16)((data[idx]<<8) + data[idx+1]);
             }
+            idx += 2;
             return number;
         }
 
@@ -277,6 +279,7 @@ namespace DCMLIB
             idx += 8;
             return number;
         }
+
     }
 
 
@@ -443,11 +446,11 @@ namespace DCMLIB
         {
             if (typeof(T) == typeof(String))
             {
-                //还存在字符串数组吗?
-                String val = "";
+                String[] vals = new String[1];
                 //引用自身的GetString方法
-                val = GetString(data, "");
-                return val as T[];
+                vals[0] = GetString(data, "");
+                return vals as T[];
+
             }
             throw new NotSupportedException();
         }
@@ -518,7 +521,8 @@ namespace DCMLIB
             if (typeof(T) == typeof(DateTime))
             {
                 String dataString = GetString(data, "");
-                DateTime val = Convert.ToDateTime(dataString);
+                DateTime[] val = new DateTime[1];
+                val[0] = Convert.ToDateTime(dataString);
                 return val as T[];
             }
             throw new NotSupportedException();

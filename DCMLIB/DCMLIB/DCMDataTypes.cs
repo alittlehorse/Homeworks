@@ -170,22 +170,36 @@ namespace DCMLIB
         public DCMFileMeta(TransferSyntax syntax) : base(syntax) { }
         public override List<DCMAbstractType> Decode(byte[] data, ref uint idx)
         {
+            uint temp_idx = 0;
             while (idx < data.Length)
             {
+
                 DCMAbstractType item = null;
-                item = syntax.Decode(data, ref idx);
-                if (item.gtag == 0x0002)
+                try
                 {
-                    items.Add(item);
+                    item = syntax.Decode(data, ref idx);
+                    if (item != null && item.gtag == 0x0002)
+                    {
+                        items.Add(item);
+                        temp_idx = idx;
+                    }
+                    else
+                    {
+                        //但要注意最后那条数据元素必须通过修改idx退回到缓冲区
+                        idx = temp_idx;
+                        break;
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    //但要注意最后那条数据元素必须通过修改idx退回到缓冲区
-                    idx -= item.length + 2 + 2 + 4;
-                    //value+两个字节的值长度+2个字节的VR+tag
-                    break;
+                    if (e.GetType()==typeof(NullReferenceException))
+                    {
+                        idx = temp_idx;
+                        break;
+                    } 
                 }
-            }
+
+            }          
             return items;
         }
         //文件头ToString方法；
@@ -237,6 +251,7 @@ namespace DCMLIB
             //在tsFactory中找到对应的数据集传输语法对象赋给基类的syntax字段
             DCMDataElement synelem = (DCMDataElement)filemeta[DicomTags.TransferSyntaxUid];
             syntax = tsFactory[synelem.vrparser.GetString(synelem.value, "").Replace("\0","")];
+
             //调用base.Decode方法解码数据集
             base.Decode(data, ref idx);
             return items;
