@@ -16,7 +16,7 @@ namespace payment.DAL
         {
             string mystr, sqlcomm;
             SqlConnection conn = new SqlConnection();
-            mystr = @"Data Source=.\;Initial Catalog=ManagementOfBeingHospitalized;Integrated Security=True";
+            mystr = @"Data Source=.;Initial Catalog=ManagementOfBingHospitalized;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             conn.ConnectionString = mystr;
             conn.Open();
 
@@ -54,7 +54,7 @@ namespace payment.DAL
             int result = 0;
             string mystr;
             SqlConnection conn = new SqlConnection();
-            mystr = @"Data Source=.\;Initial Catalog=ManagementOfBeingHospitalized;Integrated Security=True";
+            mystr = @"Data Source=.;Initial Catalog=ManagementOfBingHospitalized;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             conn.ConnectionString = mystr;
             conn.Open();
             SqlCommand cmd = new SqlCommand(mysql, conn);

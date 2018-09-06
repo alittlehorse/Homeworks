@@ -33,6 +33,8 @@
             this.tsWindow = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tsLevel = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -78,11 +80,39 @@
             this.tsLevel.TabIndex = 4;
             this.tsLevel.Text = "0";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(388, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 15);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "预设窗位";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "肺窗",
+            "脑窗",
+            "骨窗",
+            "纵膈窗",
+            "肝窗",
+            "腹窗",
+            "脊柱窗"});
+            this.comboBox1.Location = new System.Drawing.Point(461, 2);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 23);
+            this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // frmImage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.tsLevel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tsWindow);
@@ -107,5 +137,7 @@
         private System.Windows.Forms.TextBox tsWindow;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tsLevel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

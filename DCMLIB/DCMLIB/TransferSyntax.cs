@@ -100,6 +100,7 @@ namespace DCMLIB
 
             if (element.vr == "OB or OW")
             {
+                //在上一层找items[DicomTags.BitsAllocated];但是上层对下层是完全不透明的;怎么办
                 element.vr = "OW";
             }
             try
